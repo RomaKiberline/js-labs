@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота №2</title>
+    <script src="./lab2.js" defer></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 50%;
+        }
+        table, th, td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body onload="clock()">
+
+<h3>Завдання 1.</h3>
+<form name="clock">
+    Дата та Час:
+    <input type="text" name="datetime" size="20" value="">
+</form>
+
+<h3>Завдання 2.</h3>
+<form name="calc">
+    <input type="text" name="display" id="display" size="20" value="">
+    <br>
+    <input type="button" value="1" onclick="addToDisplay('1')">
+    <input type="button" value="2" onclick="addToDisplay('2')">
+    <input type="button" value="3" onclick="addToDisplay('3')">
+    <input type="button" value="+" onclick="addToDisplay('+')">
+    <br>
+    <input type="button" value="4" onclick="addToDisplay('4')">
+    <input type="button" value="5" onclick="addToDisplay('5')">
+    <input type="button" value="6" onclick="addToDisplay('6')">
+    <input type="button" value="-" onclick="addToDisplay('-')">
+    <br>
+    <input type="button" value="7" onclick="addToDisplay('7')">
+    <input type="button" value="8" onclick="addToDisplay('8')">
+    <input type="button" value="9" onclick="addToDisplay('9')">
+    <input type="button" value="*" onclick="addToDisplay('*')">
+    <br>
+    <input type="button" value="C" onclick="clearDisplay()">
+    <input type="button" value="0" onclick="addToDisplay('0')">
+    <input type="button" value="=" onclick="calculate()">
+    <input type="button" value="/" onclick="addToDisplay('/')">
+</form>
+
+<h3>Завдання 3. Створення таблиці</h3>
+<label for="rows">Кількість рядків:</label>
+<input type="number" id="rows" min="1">
+<br><br>
+<label for="cols">Кількість стовпців:</label>
+<input type="number" id="cols" min="1">
+<br><br>
+<button onclick="generateTable()">Створити таблицю</button>
+
+<h3>Таблиця:</h3>
+<div id="tableContainer"></div>
+
+<h3>Сума елементів 3-го стовпця:</h3>
+<p id="columnSum">0</p>
+
+<h3>Завдання 4.</h3>
+<button onclick="runConsoleLogTests()">Запустити тести</button>
+
+<h3>Завдання 5.</h3>
+<button onclick="runConsoleMethodsTests()">Запустити тести</button>
+
+</body>
+</html>
