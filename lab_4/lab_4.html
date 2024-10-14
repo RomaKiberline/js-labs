@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота №4</title>
+    <link rel="stylesheet" href="./lab_4.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Тестування</h1>
+        <form id="testForm">
+            <div class="question">
+                <p>Запитання 1: Який елемент HTML використовується для створення посилання?</p>
+                <label><input type="radio" name="radio1" value="0">div</label>
+                <label><input type="radio" name="radio1" value="0">span</label>
+                <label><input type="radio" name="radio1" value="1">a</label>
+                <label><input type="radio" name="radio1" value="0">link</label>
+            </div>
+
+            <div class="question">
+                <p>Запитання 2: Яка мова програмування є основою для розробки веб-сторінок?</p>
+                <label><input type="radio" name="radio2" value="0">Python</label>
+                <label><input type="radio" name="radio2" value="0">C++</label>
+                <label><input type="radio" name="radio2" value="1">JavaScript</label>
+                <label><input type="radio" name="radio2" value="0">Java</label>
+            </div>
+
+            <div class="question">
+                <p>Запитання 3: Які з наведених властивостей CSS використовуються для форматування тексту? (2)</p>
+                <label><input type="checkbox" name="checkbox3" value="correct">color</label>
+                <label><input type="checkbox" name="checkbox3" value="correct">font-size</label>
+                <label><input type="checkbox" name="checkbox3" value="wrong">border</label>
+                <label><input type="checkbox" name="checkbox3" value="wrong">background-color</label>
+            </div>
+
+            <div class="question">
+                <p>Запитання 4: Які з наведених способів використовуються для коментарів у CSS? (2)</p>
+                <label><input type="checkbox" name="checkbox4" value="correct"> /* Коментар */ </label>
+                <label><input type="checkbox" name="checkbox4" value="correct"> // Коментар </label>
+                <label><input type="checkbox" name="checkbox4" value="wrong"> &lt;!-- Коментар --&gt; </label>
+                <label><input type="checkbox" name="checkbox4" value="wrong"> /* Коментар HTML */</label>
+            </div>
+
+            <div class="question">
+                <p>Запитання 5: Який з наведених атрибутів використовується для встановлення класу елемента?</p>
+                <select name="select1">
+                    <option value="wrong">id</option>
+                    <option value="correct">class</option>
+                    <option value="wrong">style</option>
+                    <option value="wrong">type</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <p>Запитання 6: Які з наведених значень використовуються для вирівнювання тексту за допомогою властивості text-align? (2)</p>
+                <select name="select2" multiple>
+                    <option value="correct">left</option>
+                    <option value="correct">right</option>
+                    <option value="wrong">justify-content</option>
+                    <option value="wrong">flex-start</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <p>Запитання 7: Яка HTML-структура використовується для створення нумерованого списку?</p>
+                <input type="text" name="textAnswer" placeholder="Введіть відповідь">
+            </div>
+
+            <button type="button" onclick="calculateResult()">Завершити тестування</button>
+        </form>
+
+        <div id="results"></div>
+    </div>
+
+    <script src="./lab_4.js"></script>
+</body>
+</html>
