@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота №3</title>
+
+    <style>
+        #keyboard {
+            display: grid;
+            grid-template-columns: repeat(10, 50px); 
+            gap: 5px; 
+            margin-top: 10px;
+            justify-content: center;
+        }
+        .letters-row {
+            display: grid;
+            grid-template-columns: repeat(8, 50px); 
+            gap: 5px;
+            justify-content: center;
+            margin-top: 5px;
+        }
+        button {
+            width: 50px;
+            height: 50px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        textarea {
+            width: 700px;
+            height: 100px;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        #controls {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 20px; 
+        }
+        #controls button {
+            width: auto; 
+            padding: 10px 20px; 
+            font-size: 16px;
+        }
+        .clear_alt_shift {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+        }
+        .check_next {
+            width: 220px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .size {
+        margin: 5px;
+        width: 80px;
+        font-size: 14px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+        .size_btn {
+            width: 150px;
+            height: 45px;
+            margin-top: 10px;
+        }
+        .size_btn_task4 {
+            width: 200px;
+        }
+        .width_task1 {
+            width: 190px;
+        }
+        .width2_task1 {
+            width: 210px;
+        }
+        .width_task5 {
+            width: 100px;
+            margin-top: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+
+        li {
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <h1>Завдання 1</h1>
+    
+    <label for="sideA">Сторона A:</label>
+    <input type="number" id="sideA" class="width_task1" placeholder="Введіть довжину сторони A">
+    
+    <label for="sideB">Сторона B:</label>
+    <input type="number" id="sideB" class="width_task1" placeholder="Введіть довжину сторони B">
+    
+    <label for="sideC">Сторона C:</label>
+    <input type="number" id="sideC" class="width_task1" placeholder="Введіть довжину сторони C">
+    
+    <label for="sideD">Сторона D:</label>
+    <input type="number" id="sideD" class="width_task1" placeholder="Введіть довжину сторони D">
+    
+    <label for="angle">Кут (в градусах):</label>
+    <input type="number" id="angle" class="width2_task1" placeholder="Введіть кут між сторонами A і B">
+
+    <button id="calculateButton" class="size_btn">Обчислити площу</button>
+    
+    <h2 id="result">Площа: <span id="area"></span></h2>
+
+    <h1>Завдання 2</h1>
+    <textarea id="output" placeholder="Тут буде введений текст"></textarea>
+    <div id="keyboard"></div>
+    <div class="clear_alt_shift">
+        <button onclick="clearOutput()" class="size">Очистити поле</button>
+        <button onclick="toggleLayout()" class="size">Alt+Shift</button>
+    </div>
+    <h1>Завдання 4</h1>
+    <img id="image" src="" alt="Зображення" width="300" height="150">
+    <br>
+    <button onclick="prevImage()" class="size_btn_task4">Назад</button>
+    <button onclick="nextImage()" class="size_btn_task4">Вперед</button>
+
+    <h1>Завдання 5</h1>
+    <div id="question"></div>
+    <input type="number" id="answer" placeholder="Ваша відповідь">
+    <div class="check_next">
+        <button class="width_task5" onclick="checkAnswer()">Перевірити</button>
+        <button class="width_task5" onclick="nextQuestion()">Наступне завдання</button>
+    </div>
+    <div id="result"></div>
+    <div id="score"></div>
+
+    <h1>Завдання 6</h1>
+    <ul id="hierarchy"></ul>
+
+    <script src="./lab_3.js"></script>
+</body>
+</html>
