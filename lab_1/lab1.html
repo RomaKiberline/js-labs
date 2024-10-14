@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна №1</title>
+</head>
+<body>
+    <h3>Завдання 1.</h3>
+    <p>Це звичайний HTML абзац.</p>
+    <script language="JavaScript">
+        document.write("Привіт! Мене звати Роман, студент групи ІПЗ-24.");
+    </script>
+    <p>Знову звичайний HTML абзац.</p>
+    <form>
+        <input type="button" value="Click me" onClick="alert('Я народився 30.11.2005 року в Івано-Франківській області')">
+    </form>
+    
+    <h3>Завдання 2.</h3>
+    <form>
+        <input type="button" value="Обчислити F" onClick="calculation()">
+    </form>
+    
+    <h3>Завдання 3.</h3>
+    <form>
+        <label for="firstField">Перше поле:</label><br>
+        <input type="text" id="firstField" name="firstField" onClick="Click_on_form()" onMouseOver="hoverMouse()" size="40"><br><br>
+        <label for="secondField">Друге поле (результат):</label><br>
+        <input type="text" id="secondField" name="secondField" readonly size="40"><br><br>
+    </form>
+    
+    <h3>Завдання 4.</h3>
+    <form>
+        <label for="inputX">Введіть значення X:</label><br>
+        <input type="text" id="inputX" name="inputX"><br><br>
+        <label for="inputY">Введіть значення Y:</label><br>
+        <input type="text" id="inputY" name="inputY"><br><br>
+        <input type="button" value="Обчислити F" onClick="calculateF()"><br><br>
+        <label for="result">Результат F:</label><br>
+        <input type="text" id="result" name="result" readonly><br><br>
+    </form>
+
+    <h3>Завдання 5.</h3>
+    <form>
+        <label for="inputXSeries">Введіть значення X для ряду:</label><br>
+        <input type="text" id="inputXSeries" name="inputXSeries"><br><br>
+        <label for="inputYSeries">Введіть значення Y для ряду:</label><br>
+        <input type="text" id="inputYSeries" name="inputYSeries"><br><br>
+        <input type="button" value="Обчислити суму ряду" onClick="calculateSeriesSum()"><br><br>
+        <label for="seriesResult">Результат суми ряду:</label><br>
+        <input type="text" id="seriesResult" name="seriesResult" readonly><br><br>
+    </form>
+    <script src="./lab1.js"></script>
+    <h3><a href="./lab1(2).html">Завдання 5.</a></h3>
+</body>
+</html>

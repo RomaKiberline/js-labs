@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Склад товарів</title>
+    <script language='JavaScript'>
+        let product = ["Чашка", "Чайник", "Ручка", "Ракетка", "Ремінь"];
+        let quantity = [105, 200, 50, 80, 120];
+        let cost = [26, 105, 15, 20, 80];
+        let selectedIndex;
+
+        // Оновлення полів кількості і вартості
+        function fun1() {
+            let inputName = document.forms["form1"]["product_select"].value;
+            selectedIndex = product.indexOf(inputName);
+            if (selectedIndex !== -1) {
+                document.forms["form1"]["output_quantity"].value = quantity[selectedIndex];
+                document.forms["form1"]["output_cost"].value = cost[selectedIndex];
+            } else {
+                document.forms["form1"]["output_quantity"].value = "Товар не знайдено";
+                document.forms["form1"]["output_cost"].value = "";
+                selectedIndex = undefined;
+            }
+        }
+
+        // Обчислення загальної вартості товару
+        function fun2() {
+            if (selectedIndex !== undefined) {
+                let totalCost = quantity[selectedIndex] * cost[selectedIndex];
+                document.forms["form1"]["output_total"].value = `Загальна вартість: ${totalCost} грн`;
+            } else {
+                document.forms["form1"]["output_total"].value = "Спочатку виберіть товар.";
+            }
+        }
+    </script>
+</head>
+<body>
+    <form name="form1">
+        <label for="product_select">Оберіть товар:</label>
+        <select name="product_select" id="product_select" onChange="fun1()">
+            <option value="">-- Виберіть товар --</option>
+            <option value="Чашка">Чашка</option>
+            <option value="Чайник">Чайник</option>
+            <option value="Ручка">Ручка</option>
+            <option value="Ракетка">Ракетка</option>
+            <option value="Ремінь">Ремінь</option>
+        </select>
+        <br><br>
+        Наявна кількість:
+        <input type="text" size="70" name="output_quantity" readonly>
+        <br>
+        Вартість:
+        <input type="text" size="70" name="output_cost" readonly>
+        <br><br>
+        <input type="button" value="Загальна сума" onClick="fun2()">
+        <br><br>
+        <input type="text" size="70" name="output_total" readonly>
+    </form>
+</body>
+</html>
