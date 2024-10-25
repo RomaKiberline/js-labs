@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма реєстрації</title>
+    <style>
+        .valid {
+            border: 2px solid green;
+        }
+        .invalid {
+            border: 2px solid red;
+        }
+        .message {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <form id="registrationForm">
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" required>
+        <span class="message" id="emailMessage">Невірний e-mail.</span><br>
+
+        <label for="fullName">Ім’я та прізвище:</label>
+        <input type="text" id="fullName" required>
+        <span class="message" id="nameMessage">Невірний формат ім’я та прізвища.</span><br>
+
+        <label for="login">Логін:</label>
+        <input type="text" id="login" required>
+        <span class="message" id="loginMessage">Логін повинен містити лише латинські літери.</span><br>
+
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" required>
+        <span class="message" id="passwordMessage">Пароль повинен бути мінімум 8 символів, включати літери, цифри та спецсимволи.</span><br>
+
+        <label for="postalCode">Поштовий індекс:</label>
+        <input type="text" id="postalCode" required>
+        <span class="message" id="postalCodeMessage">Поштовий індекс повинен містити 5 цифр.</span><br>
+
+        <button type="button" onclick="validateForm()">Виконати</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            // Отримуємо поля
+            const email = document.getElementById("email");
+            const fullName = document.getElementById("fullName");
+            const login = document.getElementById("login");
+            const password = document.getElementById("password");
+            const postalCode = document.getElementById("postalCode");
+
+            // Регулярні вирази
+            const emailRegex = /^[a-z0-9._%+-]+@pnu\.edu\.ua$/i;
+            const nameRegex = /^[А-ЯІЄЁ][а-яіїєґ]+ [А-ЯІЄЁ]{1,}$/;
+            const loginRegex = /^[a-zA-Z0-9]+$/;
+            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[-!@#$%^&*])[A-Za-z\d-!@#$%^&*]{8,}$/;
+            const postalCodeRegex = /^\d{5}$/;
+
+            // Масиви для повідомлень
+            const messages = [
+                { field: email, regex: emailRegex, messageId: "emailMessage" },
+                { field: fullName, regex: nameRegex, messageId: "nameMessage" },
+                { field: login, regex: loginRegex, messageId: "loginMessage" },
+                { field: password, regex: passwordRegex, messageId: "passwordMessage" },
+                { field: postalCode, regex: postalCodeRegex, messageId: "postalCodeMessage" },
+            ];
+
+            let allValid = true;
+
+            messages.forEach(({ field, regex, messageId }) => {
+                const messageElement = document.getElementById(messageId);
+                if (regex.test(field.value)) {
+                    field.classList.remove("invalid");
+                    field.classList.add("valid");
+                    messageElement.style.display = "none";
+                } else {
+                    field.classList.remove("valid");
+                    field.classList.add("invalid");
+                    messageElement.style.display = "block";
+                    allValid = false;
+                }
+            });
+
+            if (allValid) {
+                alert("Всі дані введено вірно!");
+            }
+        }
+    </script>
+</body>
+</html>
