@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./lab5_2.css">
+    <title>Вертикальне Меню з Підпунктами</title>
+</head>
+<body>
+    <div class="vertical-menu">
+        <button class="menu-item" onclick="toggleSubmenu('submenu1')">Меню 1</button>
+        <div id="submenu1" class="submenu">
+            <button class="submenu-item" onclick="toggleSubsubmenu('subsubmenu1-1')">Підпункт 1.1</button>
+            <div id="subsubmenu1-1" class="subsubmenu">
+                <button class="subsubmenu-item">Підпункт 1.1.1</button>
+                <button class="subsubmenu-item">Підпункт 1.1.2</button>
+            </div>
+            <button class="submenu-item" onclick="toggleSubsubmenu('subsubmenu1-2')">Підпункт 1.2</button>
+            <div id="subsubmenu1-2" class="subsubmenu">
+                <button class="subsubmenu-item">Підпункт 1.2.1</button>
+                <button class="subsubmenu-item">Підпункт 1.2.2</button>
+            </div>
+        </div>
+
+        <button class="menu-item" onclick="toggleSubmenu('submenu2')">Меню 2</button>
+        <div id="submenu2" class="submenu">
+            <button class="submenu-item" onclick="toggleSubsubmenu('subsubmenu2-1')">Підпункт 2.1</button>
+            <div id="subsubmenu2-1" class="subsubmenu">
+                <button class="subsubmenu-item">Підпункт 2.1.1</button>
+                <button class="subsubmenu-item">Підпункт 2.1.2</button>
+            </div>
+            <button class="submenu-item" onclick="toggleSubsubmenu('subsubmenu2-2')">Підпункт 2.2</button>
+            <div id="subsubmenu2-2" class="subsubmenu">
+                <button class="subsubmenu-item">Підпункт 2.2.1</button>
+                <button class="subsubmenu-item">Підпункт 2.2.2</button>
+            </div>
+        </div>
+
+        <button class="menu-item" onclick="toggleSubmenu('submenu3')">Меню 3</button>
+        <div id="submenu3" class="submenu">
+            <button class="submenu-item" onclick="toggleSubsubmenu('subsubmenu3-1')">Підпункт 3.1</button>
+            <div id="subsubmenu3-1" class="subsubmenu">
+                <button class="subsubmenu-item">Підпункт 3.1.1</button>
+                <button class="subsubmenu-item">Підпункт 3.1.2</button>
+            </div>
+            <button class="submenu-item" onclick="toggleSubsubmenu('subsubmenu3-2')">Підпункт 3.2</button>
+            <div id="subsubmenu3-2" class="subsubmenu">
+                <button class="subsubmenu-item">Підпункт 3.2.1</button>
+                <button class="subsubmenu-item">Підпункт 3.2.2</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./lab5_2.js"></script>
+</body>
+</html>
