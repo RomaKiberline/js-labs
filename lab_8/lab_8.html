@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота №8</title>
+    <link rel="stylesheet" href="./lab_8.css">
+</head>
+<body>
+    <p><b>1. Створіть об'єкт, що описує час (години, хвилини, секунди), і наступні функції для роботи з цим об'єктом.</b></p>
+    <div>
+        <label for="seconds">Час в секундах:</label>
+        <input type="number" id="seconds" placeholder="Введіть секунди">
+        <button onclick="changeBySeconds()">Змінити час</button>
+    </div>
+    <div>
+        <label for="minutes">Час в хвилинах:</label>
+        <input type="number" id="minutes" placeholder="Введіть хвилини">
+        <button onclick="changeByMinutes()">Змінити час</button>
+    </div>
+    <div>
+        <label for="hours">Час в годинах:</label>
+        <input type="number" id="hours" placeholder="Введіть години">
+        <button onclick="changeByHours()">Змінити час</button>
+    </div>
+    <div class="output" id="timeDisplay">Поточний час: 00:00:00</div>
+    <div>
+        <h3>Завдання 2.1.Виведення поточної дати, дня тижня і часу</h3>
+        <button onclick="displayCurrentDate()">Виконати</button>
+        <div id="currentDateOutput"></div>
+    </div>
+        
+    <div>
+        <h3>Завдання 2.2.Виведення дня і номера тижня</h3>
+        <button onclick="displayDayInfo()">Виконати</button>
+        <div id="dayInfoOutput"></div>
+    </div>
+        
+    <div>
+        <h3>Завдання 2.3.Визначення дати через N днів</h3>
+        <input id="daysInput" type="number" placeholder="Введіть N">
+        <button onclick="calculateDate()">Виконати</button>
+        <div id="calculateDateOutput"></div>
+    </div>
+        
+    <div>
+        <h3>Завдання 2.4.Останній день місяця</h3>
+        <input id="yearInput" type="number" placeholder="Введіть рік">
+        <input id="monthInput" type="number" placeholder="Введіть номер місяця">
+        <button onclick="findLastDayOfMonth()">Виконати</button>
+        <div id="lastDayOutput"></div>
+    </div>
+        
+    <div>
+        <h3>Завдання 2.5.Кількість секунд від початку дня та до наступного дня</h3>
+        <button onclick="getSecondsInfo()">Виконати</button>
+        <div id="secondsInfoOutput"></div>
+    </div>
+        
+    <div>
+        <h3>Завдання 2.6.Виведення часу від введеної дати</h3>
+        <input id="dateTimeInput" type="text" placeholder="дд.мм.рррр год:хв">
+        <button onclick="getTimeDifference()">Виконати</button>
+        <div id="timeDifferenceOutput"></div>
+    </div>
+    <script src="./lab_8.js"></script>
+</body>
+</html>
