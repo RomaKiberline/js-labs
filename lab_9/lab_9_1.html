@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Лабораторна робота №9(1)</title>
+  <link rel="stylesheet" href="./lab_9_1.css">
+  <script src="./lab_9_1.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- 1: Анімації зі степенями -->
+    <section>
+      <h2>Анімації зі степенями n</h2>
+      <div class="timing-examples">
+        <div class="timing-block">
+          <h3>Степінь 2 (параболічна)</h3>
+          <div class="animated-block" id="power2">▶</div>
+          <button onclick="animateBlock('power2', function(t) { return Math.pow(t, 2); })">Запустити</button>
+        </div>
+
+        <div class="timing-block">
+          <h3>Степінь 3 (кубічна)</h3>
+          <div class="animated-block" id="power3">▶</div>
+          <button onclick="animateBlock('power3', function(t) { return Math.pow(t, 3); })">Запустити</button>
+        </div>
+
+        <div class="timing-block">
+          <h3>Степінь 4</h3>
+          <div class="animated-block" id="power4">▶</div>
+          <button onclick="animateBlock('power4', function(t) { return Math.pow(t, 4); })">Запустити</button>
+        </div>
+
+        <div class="timing-block">
+          <h3>Степінь 5</h3>
+          <div class="animated-block" id="power5">▶</div>
+          <button onclick="animateBlock('power5', function(t) { return Math.pow(t, 5); })">Запустити</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2: Анімація потяга -->
+    <section>
+      <h2>Анімація потяга (setInterval)</h2>
+      <img id="train" src="https://js.cx/clipart/train.gif">
+      <script>
+        train.onclick = function() {
+          let start = Date.now();
+          let timer = setInterval(function() {
+            let timePassed = Date.now() - start;
+            train.style.left = timePassed / 5 + 'px';
+            if (timePassed > 2000) clearInterval(timer);
+          }, 20);
+        }
+      </script>
+    </section>
+
+    <!-- 3: Прогрес-бар -->
+    <section>
+      <h2>Анімація прогрес-бару</h2>
+      <progress id="elem"></progress>
+      <script>
+        elem.onclick = function() {
+          animate({
+            duration: 1000,
+            timing: function(timeFraction) {
+              return timeFraction;
+            },
+            draw: function(progress) {
+              elem.style.width = progress * 100 + '%';
+            }
+          });
+        };
+      </script>
+    </section>
+
+    <!-- 4: Анімований текст -->
+    <section>
+      <h2>Анімований текст</h2>
+      <textarea id="textExample" rows="5" cols="60">He took his vorpal sword in hand:
+Long time the manxome foe he sought—
+So rested he by the Tumtum tree,
+And stood awhile in thought.</textarea>
+
+      <button onclick="animateText(textExample)">Запустити анімацію тексту!</button>
+
+      <script>
+        function animateText(textArea) {
+          let text = textArea.value;
+          let to = text.length,
+            from = 0;
+
+          animate({
+            duration: 5000,
+            timing: bounce,
+            draw: function(progress) {
+              let result = (to - from) * progress + from;
+              textArea.value = text.slice(0, Math.ceil(result))
+            }
+          });
+        }
+      </script>
+    </section>
+
+    <!-- 5: Функції часу -->
+    <section>
+      <h2>Функції часу</h2>
+      <div class="timing-examples">
+        <div class="timing-block">
+          <h3>Лінійна</h3>
+          <div class="animated-block" id="linear">▶</div>
+          <button onclick="animateBlock('linear', linear)">Запустити</button>
+        </div>
+
+        <div class="timing-block">
+          <h3>Відскок</h3>
+          <div class="animated-block" id="bounce">▶</div>
+          <button onclick="animateBlock('bounce', bounce)">Запустити</button>
+        </div>
+
+        <div class="timing-block">
+          <h3>Еластична</h3>
+          <div class="animated-block" id="elastic">▶</div>
+          <button onclick="animateBlock('elastic', function(t) { return elastic(1.5, t); })">Запустити</button>
+        </div>
+      </div>
+
+      <script>
+        function animateBlock(id, timing) {
+          let element = document.getElementById(id);
+          element.style.left = '0px';
+
+          animate({
+            duration: 2000,
+            timing: timing,
+            draw: function(progress) {
+              element.style.left = progress * 100 + 'px';
+            }
+          });
+        }
+      </script>
+    </section>
+  </div>
+</body>
+</html>
