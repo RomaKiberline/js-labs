@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота 12</title>
+    <script src="./jquery-3.7.1.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #f0f0f0;
+        }
+        .block {
+            width: 80px;
+            height: 80px;
+            background-color: #4CAF50;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        .container {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        button {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #1976D2;
+        }
+        #logo {
+            position: relative;
+            width: 300px;
+            height: 150px;
+            background: #1976D2;
+            border-radius: 10px;
+            color: white;
+            padding: 20px;
+            margin: 20px auto;
+            text-align: center;
+            transition: all 0.3s ease;
+            transform-origin: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .number {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .title {
+            font-size: 18px;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <h2>Завдання 1</h2>
+    <h3>Методи jQuery</h3>
+
+    <div class="container">
+        <h3>Черга анімацій (clearQueue, toggle)</h3>
+        <div id="block1" class="block"></div>
+        <button onclick="startQueue()">Запустити анімації</button>
+        <button onclick="clearQueue()">Очистити чергу</button>
+        <button onclick="toggleAnimation()">Показати/Сховати</button>
+    </div>
+
+    <div class="container">
+        <h3>Затримка (delay)</h3>
+        <div id="block2" class="block"></div>
+        <button onclick="animationWithDelay()">Анімація з затримкою</button>
+    </div>
+
+    <div class="container">
+        <h3>Поява/Зникнення (fadeIn/fadeOut)</h3>
+        <div id="block3" class="block"></div>
+        <button onclick="toggleVisibility()">Показати/Сховати</button>
+    </div>
+
+    <h2>Завдання 2</h2>
+    <div class="container">
+        <div id="logo">
+            <div class="number">121</div>
+            <div class="title">Інженерія програмного забезпечення</div>
+        </div>
+        <button onclick="animateLogo()">Анімувати</button>
+    </div>
+
+    <script>
+        function startQueue() {
+            $("#block1")
+                .animate({marginLeft: '150px'}, 1000)
+                .animate({marginTop: '50px'}, 1000)
+                .animate({marginLeft: '0'}, 1000)
+                .animate({marginTop: '0'}, 1000);
+        }
+
+        function clearQueue() {
+            $("#block1")
+                .clearQueue()
+                .stop()
+                .css({marginLeft: '0', marginTop: '0'});
+        }
+
+        function toggleAnimation() {
+            $("#block1").toggle(1000);
+        }
+
+        function animationWithDelay() {
+            $("#block2")
+                .animate({marginLeft: '150px'}, 800)
+                .delay(1000)
+                .animate({marginLeft: '0'}, 800);
+        }
+
+        let isVisible = true;
+        function toggleVisibility() {
+            if (isVisible) {
+                $("#block3").fadeOut(800);
+            } else {
+                $("#block3").fadeIn(800);
+            }
+            isVisible = !isVisible;
+        }
+
+        function animateLogo() {
+            $("#logo").animate({
+                width: "400px",
+                height: "180px",
+                borderRadius: "20px"
+            }, {
+                duration: 800,
+                easing: "easeOutBack",
+                queue: false,
+                specialEasing: {
+                    width: "easeOutElastic",
+                    height: "easeOutBack",
+                    borderRadius: "easeOutExpo"
+                },
+                progress: function(animation, progress) {
+                    $(this).css({
+                        transform: `rotate(${progress * 360}deg) scale(${1 + progress * 0.1})`,
+                        backgroundColor: `hsl(${200 + progress * 60}, 70%, 50%)`
+                    });
+                },
+                complete: function() {
+                    $(this).animate({
+                        width: "300px",
+                        height: "150px",
+                        borderRadius: "10px"
+                    }, {
+                        duration: 600,
+                        easing: "easeInOutBack",
+                        progress: function(animation, progress) {
+                            $(this).css({
+                                transform: `rotate(${360 - progress * 360}deg) scale(${1.1 - progress * 0.1})`,
+                                backgroundColor: `hsl(${260 - progress * 60}, 70%, 50%)`
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+        jQuery.easing['easeOutBack'] = function (x, t, b, c, d, s) {
+            if (s == undefined) s = 1.70158;
+            return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
+        };
+        jQuery.easing['easeOutElastic'] = function (x, t, b, c, d) {
+            var s=1.70158;var p=0;var a=c;
+            if (t==0) return b;  if ((t/=d)==1) return b+c;  if (!p) p=d*.3;
+            if (a < Math.abs(c)) { a=c; var s=p/4; }
+            else var s = p/(2*Math.PI) * Math.asin (c/a);
+            return a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;
+        };
+        jQuery.easing['easeOutExpo'] = function (x, t, b, c, d) {
+            return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
+        };
+        jQuery.easing['easeInOutBack'] = function (x, t, b, c, d, s) {
+            if (s == undefined) s = 1.70158;
+            if ((t/=d/2) < 1) return c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;
+            return c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;
+        };
+    </script>
+</body>
+</html>
