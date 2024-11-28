@@ -1,0 +1,106 @@
+<html> 
+<head>  
+<script type="text/javascript" src="js/jquery-3.7.1.min.js"></script> 
+<style>
+    .hover-style {
+        background-color: lightgray;
+        border: 1px solid black;
+    }
+    .click-style {
+        background-color: yellow;
+        border: 2px solid red;
+    }
+    input[type="text"]:hover, input[type="text"]:focus {
+        background-color: initial;
+        border: initial;
+    }
+</style>
+<script> 
+$(document).ready(function() { 
+    var $text = $('#hide_text'); 
+    $text.hide(); 
+    $('.button').click(function() { 
+        $text.show(200); 
+    }); 
+    
+    alert("Бібліотека jQuery готова до роботи!");
+    
+    $("p:first").text("Перший абзац DOM!");
+    jQuery("p:last").text("Останній абзац DOM!");
+
+    $("#hide_text").hover(
+        function() {
+            $(this).addClass('hover-style');
+        }, 
+        function() {
+            $(this).removeClass('hover-style');
+        }
+    );
+
+    $("#hide_text").bind('click', function() {
+        $(this).addClass('click-style');
+    });
+
+    $("#hide_text").bind('dblclick', function() {
+        $(this).removeClass('click-style');
+    });
+
+    $("#single-click-btn").bind('click', function() {
+        alert('Одинарний клік');
+    });
+
+    $("#double-click-btn").bind('dblclick', function() {
+        alert('Подвійний клік');
+    });
+
+    $("#show-image").click(function(e) {
+        e.preventDefault();
+        $("#image").show();
+    });
+
+    $("#image").click(function() {
+        $(this).hide();
+    });
+
+    $("#image").mouseover(function() {
+        $(this).attr('title', 'Тигр');
+    }).mouseout(function() {
+        $(this).removeAttr('title');
+    });
+
+    $("form").submit(function() {
+        if ($("input[type='text']").val() == "correct") {
+            $("span").text("Перевіряєм...").show();
+            setTimeout(function() {
+                $("span").fadeOut(500, function() {
+                    alert("Успішно!");
+                });
+            }, 1000);
+            return false;
+        }
+        $("span").text("Неправильно!").show().fadeOut(1000);
+        return false;
+    });
+});
+</script> 
+</head>  
+<body>  
+<p>Перший абзац</p>
+<h1>Контент сторінки</h1> 
+<a href="#" class="button">Натисніть, щоб показати текст</a> 
+<div id="hide_text">Демонстраційний прихований текст</div> 
+<button id="single-click-btn">Кнопка 1</button>
+<button id="double-click-btn">Кнопка 2</button>
+<a href="#" id="show-image">Показати зображення</a>
+<img id="image" src="./tiger.jpg" alt="Тигр" style="display:none; width: 200px; height: auto;"/>
+<p>Введіть в текстове поле слово 'correct'.</p>
+<form>
+    <div>
+        <input type="text" />
+        <input type="submit" />
+    </div>
+</form>
+<span></span>
+<p>Останній абзац</p>
+</body>
+</html>
