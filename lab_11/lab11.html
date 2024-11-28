@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота 11 - jQuery методи</title>
+    <script src="./jquery-3.7.1.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .demo-block {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: #f8f9fa;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-left: 3px solid #2196F3;
+        }
+        .test-element {
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ccc;
+        }
+        .highlighted {
+            background-color: #e3f2fd;
+            border-color: #2196F3;
+        }
+        .container { 
+            margin: 20px; 
+        }
+        .box { 
+            border: 1px solid #ccc; 
+            padding: 10px; 
+            margin: 10px 0; 
+        }
+        .highlight { 
+            background-color: yellow; 
+        }
+        .element {
+            padding: 10px;
+            margin: 5px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+        }
+        .selected {
+            background-color: #e8f5e9;
+            border: 2px solid #4CAF50;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-left: 3px solid #2196F3;
+        }
+        button {
+            margin: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .modified {
+            background-color: #ffeb3b;
+            font-weight: bold;
+        }
+        .panda {
+            margin: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+        .utility-section {
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+        }
+        .demo-block {
+            margin: 10px 0;
+        }
+        .user-card {
+            padding: 10px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+        }
+        #trimText {
+            width: 100%;
+            margin: 10px 0;
+        }
+        .data-info {
+            color: #2196F3;
+            font-family: monospace;
+        }
+        .method-block {
+            margin-bottom: 20px;
+        }
+        .demo-section {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .target, .detachable, .resizable, .movable {
+            padding: 10px;
+            margin: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+        }
+        .resizable {
+            width: 200px;
+            transition: width 0.3s;
+        }
+        .movable {
+            position: relative;
+            background-color: #e3f2fd;
+            cursor: pointer;
+        }
+        .new-element {
+            background-color: #e8f5e9;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #4CAF50;
+        }
+        .demo-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: #f8f9fa;
+        }
+        .base-element, .detachable, .size-element, .coord-element {
+            padding: 10px;
+            margin: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+        }
+        .size-element {
+            width: 200px;
+            background-color: #e3f2fd;
+            transition: width 0.3s;
+        }
+        .coord-element {
+            position: relative;
+            background-color: #fff3e0;
+            cursor: move;
+        }
+        .new-element {
+            background-color: #e8f5e9;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #4CAF50;
+        }
+        #elements-container {
+            min-height: 100px;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-left: 3px solid #2196F3;
+        }
+        .controls {
+            margin: 10px 0;
+        }
+        .test-block {
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            background-color: #f8f9fa;
+        }
+        .highlighted {
+            background-color: #e3f2fd;
+            border-color: #2196F3;
+        }
+        .button-group {
+            margin: 10px 0;
+        }
+        .button-group button {
+            margin: 5px;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Завдання 1: Базові методи jQuery</h2>
+        <!-- .html() демонстрація -->
+        <div class="box">
+            <h3>1. Метод .html()</h3>
+            <div id="htmlDemo" class="test-element">
+                Початковий HTML контент
+            </div>
+            <button onclick="demoHtml()">Змінити HTML</button>
+            <div id="htmlResult" class="result"></div>
+        </div>
+
+        <!-- .css() демонстрація -->
+        <div class="box">
+            <h3>2. Метод .css()</h3>
+            <div id="cssDemo" class="test-element">
+                Текст для стилізації
+            </div>
+            <button onclick="demoCss()">Змінити CSS</button>
+            <div id="cssResult" class="result"></div>
+        </div>
+
+        <!-- .val() демонстрація -->
+        <div class="box">
+            <h3>3. Метод .val()</h3>
+            <input type="text" id="valDemo" value="Початкове значення">
+            <button onclick="demoVal()">Змінити значення</button>
+            <div id="valResult" class="result"></div>
+        </div>
+
+        <!-- .attr() та .removeAttr() демонстрація -->
+        <div class="box">
+            <h3>4. Методи .attr() та .removeAttr()</h3>
+            <div id="attrDemo">
+                <div id="testDiv" class="test-element">
+                    Елемент для роботи з атрибутами
+                </div>
+                <div class="button-group">
+                    <button onclick="getAttr()">1. Отримати значення атрибута</button>
+                    <button onclick="setAttr()">2. Встановити атрибут</button>
+                    <button onclick="setMultipleAttr()">3. Встановити декілька атрибутів</button>
+                    <button onclick="setAttrFunction()">4. Змінити через функцію</button>
+                    <button onclick="removeAttr()">5. Видалити атрибути</button>
+                </div>
+                <div id="attrResult" class="result"></div>
+            </div>
+        </div>
+
+        <h2>Завдання 2: Методи маніпуляції DOM</h2>
+        <div class="box">
+            <!-- Додавання -->
+            <div class="demo-section">
+                <h3>Додавання</h3>
+                <div id="insertDemo">
+                    <div class="base-element">Базовий елемент</div>
+                    <button onclick="demoInsertAfter()">insertAfter()</button>
+                    <div id="insertResult" class="result"></div>
+                </div>
+            </div>
+
+            <!-- Заміна і видалення -->
+            <div class="demo-section">
+                <h3>Заміни і видалення</h3>
+                <div id="detachDemo">
+                    <div id="elements-container">
+                        <div class="detachable">Елемент 1</div>
+                        <div class="detachable">Елемент 2</div>
+                        <div class="detachable">Елемент 3</div>
+                    </div>
+                    <button onclick="demoDetach()">detach()</button>
+                    <div id="detachResult" class="result"></div>
+                </div>
+            </div>
+
+            <!-- Розмір і координати -->
+            <div class="demo-section">
+                <h3>Розмір і координати</h3>
+                <div id="sizeDemo">
+                    <div class="size-element">Елемент для зміни розміру</div>
+                    <div class="coord-element">Елемент для переміщення</div>
+                    <div class="controls">
+                        <button onclick="demoWidth()">width()</button>
+                        <button onclick="demoOffset()">offset()</button>
+                    </div>
+                    <div id="sizeResult" class="result"></div>
+                </div>
+            </div>
+        </div>
+
+        <h2>Завдання 3: Методи обходу DOM</h2>
+        <div class="box">
+            <div id="elements">
+                <div class="element">Елемент 1</div>
+                <div class="element">Елемент 2</div>
+                <div class="element">Елемент 3</div>
+                <div class="element">Елемент 4</div>
+                <div class="element">Елемент 5</div>
+            </div>
+            <div class="controls">
+                <button onclick="demoEq()">1. eq()</button>
+                <button onclick="demoNextUntil()">2. nextUntil()</button>
+                <button onclick="demoSiblings()">3. siblings()</button>
+                <button onclick="demoNext()">4. next()</button>
+                <button onclick="demoEnd()">5. end()</button>
+            </div>
+            <div id="result" class="result"></div>
+        </div>
+
+        <h2>Завдання 4: Метод .filter()</h2>
+        <div class="box">
+            <div id="filterDemo">
+                <ul>
+                    <li class="filterable">Елемент 1</li>
+                    <li class="filterable">Елемент 2</li>
+                    <li class="filterable">Елемент 3</li>
+                    <li class="filterable">Елемент 4</li>
+                    <li class="filterable">Елемент 5</li>
+                    <li class="filterable">Елемент 6</li>
+                </ul>
+                <button onclick="filterByClass()">Фільтрувати за класом</button>
+                <button onclick="filterEveryThird()">Фільтрувати кожен третій</button>
+            </div>
+            <div id="filterResult" class="result"></div>
+        </div>
+
+        <h2>Завдання 5: Утиліти jQuery</h2>
+        <div class="box">
+            <div class="utility-section">
+                <!-- removeData -->
+                <div class="method-block">
+                    <h4>1. removeData</h4>
+                    <input type="text" id="dataInput" placeholder="Введіть дані">
+                    <button onclick="demoRemoveData()">Видалити дані</button>
+                </div>
+
+                <!-- trim -->
+                <div class="method-block">
+                    <h4>2. trim</h4>
+                    <input type="text" id="trimInput" placeholder="Введіть текст з пробілами">
+                    <button onclick="demoTrim()">Обрізати пробіли</button>
+                </div>
+
+                <!-- type -->
+                <div class="method-block">
+                    <h4>3. type</h4>
+                    <select id="typeSelect">
+                        <option value="string">Рядок "Hello"</option>
+                        <option value="number">Число 123</option>
+                        <option value="boolean">Булеве true</option>
+                        <option value="array">Масив []</option>
+                        <option value="object">Об'єкт {}</option>
+                        <option value="null">null</option>
+                        <option value="undefined">undefined</option>
+                        <option value="date">new Date()</option>
+                        <option value="regexp">/regex/</option>
+                    </select>
+                    <button onclick="demoType()">Перевірити тип</button>
+                </div>
+            </div>
+            <div id="utilityResult" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Завдання 1: Базові методи
+            $('#htmlBtn').click(function() {
+                $('#htmlContent').html('<strong>Новий HTML</strong> контент');
+            });
+
+            $('#cssBtn').click(function() {
+                $('#cssElement').css({
+                    'color': 'blue',
+                    'font-size': '20px',
+                    'background-color': '#f0f0f0'
+                });
+            });
+
+            $('#valBtn').click(function() {
+                let currentVal = $('#valInput').val();
+                alert('Поточне значення: ' + currentVal);
+                $('#valInput').val('Нове значення');
+            });
+
+            function updateAttrStatus(message) {
+                $('#attrStatus').html(`<div style="margin-top: 10px; color: green;">${message}</div>`);
+            }
+
+            // Методи .attr() та .removeAttr()
+            function getAttr() {
+                let classValue = $('#testDiv').attr('class');
+                $('#attrStatus').html(`Значення атрибута class: ${classValue}`);
+            }
+
+            function setAttr() {
+                $('#testDiv')
+                    .attr('title', 'Це тестовий блок')
+                    .attr('style', 'padding: 10px; background-color: #e3f2fd; border: 1px solid #2196F3;');
+                $('#attrStatus').html('Встановлено атрибути title та style');
+            }
+
+            function setMultipleAttr() {
+                $('#testDiv').attr({
+                    'class': 'test-block highlighted',
+                    'data-id': '123',
+                    'data-type': 'demo'
+                });
+                $('#attrStatus').html('Встановлено multiple атрибути: class, data-id, data-type');
+            }
+
+            function setAttrFunction() {
+                $('#testDiv').attr('data-count', function(i, val) {
+                    let newVal = val ? parseInt(val) + 1 : 1;
+                    return newVal;
+                });
+                $('#attrStatus').html('Значення атрибута data-count збільшено на 1');
+            }
+
+            function removeAttr() {
+                $('#testDiv').removeAttr('title data-id data-type data-count');
+                $('#testDiv').attr('style', 'padding: 10px; margin: 10px; border: 1px solid #ccc;');
+                $('#testDiv').attr('class', 'test-block');
+                $('#attrStatus').html('Видалено атрибути: title, data-id, data-type, data-count');
+            }
+        });
+
+        // Завдання 2: Методи маніпуляції DOM
+        let detachedElements = [];
+        let widthCount = 0;
+        let isElementMoved = false;
+
+        // Додавання
+        function demoInsertAfter() {
+            let newElement = $('<div class="new-element">Новий елемент</div>');
+            newElement.insertAfter('.base-element');
+            $('#insertResult').html('Новий елемент додано після базового');
+        }
+
+        // Заміни і видалення
+        function demoDetach() {
+            if (detachedElements.length === 0) {
+                detachedElements = $('.detachable').detach();
+                $('#detachResult').html('Елементи від\'єднано та збережено в пам\'яті');
+            } else {
+                detachedElements.appendTo('#elements-container');
+                detachedElements = [];
+                $('#detachResult').html('Елементи повернуто назад');
+            }
+        }
+
+        // Розмір і координати
+        function demoWidth() {
+            let $element = $('.size-element');
+            widthCount = (widthCount + 1) % 3;
+            
+            $element.width(function(index, width) {
+                let newWidth;
+                switch(widthCount) {
+                    case 0: newWidth = 200; break;
+                    case 1: newWidth = 300; break;
+                    case 2: newWidth = 400; break;
+                }
+                $('#sizeResult').html(`Поточна ширина: ${newWidth}px`);
+                return newWidth;
+            });
+        }
+
+        function demoOffset() {
+            let $element = $('.coord-element');
+            if (!isElementMoved) {
+                let currentOffset = $element.offset();
+                $element.offset({
+                    top: currentOffset.top + 30,
+                    left: currentOffset.left + 50
+                });
+                isElementMoved = true;
+                $('#sizeResult').html(`Нові координати: top=${Math.round(currentOffset.top + 30)}px, left=${Math.round(currentOffset.left + 50)}px`);
+            } else {
+                let currentOffset = $element.offset();
+                $element.offset({
+                    top: currentOffset.top - 30,
+                    left: currentOffset.left - 50
+                });
+                isElementMoved = false;
+                $('#sizeResult').html(`Повернуто на початкову позицію`);
+            }
+        }
+
+        // Завдання 3: Методи обходу DOM
+        function clearSelections() {
+            $('.element').removeClass('selected');
+            $('#result').empty();
+        }
+
+        function demoEq() {
+            clearSelections();
+            $('.element').eq(2).addClass('selected');
+            $('#result').html('Метод eq(2) вибрав третій елемент (індекс 2)');
+        }
+
+        function demoNextUntil() {
+            clearSelections();
+            $('.element:first')
+                .nextUntil('.element:eq(4)')
+                .addClass('selected');
+            $('#result').html('Метод nextUntil() вибрав елементи від першого до четвертого');
+        }
+
+        function demoSiblings() {
+            clearSelections();
+            $('.element:eq(2)').siblings().addClass('selected');
+            $('#result').html('Метод siblings() вибрав усі елементи, крім третього');
+        }
+
+        function demoNext() {
+            clearSelections();
+            $('.element:eq(1)').next().addClass('selected');
+            $('#result').html('Метод next() вибрав елемент після другого');
+        }
+
+        function demoEnd() {
+            clearSelections();
+            $('.element')
+                .eq(2)
+                .addClass('selected')
+                .end()
+                .first()
+                .addClass('selected');
+            $('#result').html('Спочатку вибрали третій елемент, а потім перший');
+        }
+
+        // Завдання 4: Метод .filter()
+        function filterByClass() {
+            $('.filterable').removeClass('modified').filter('.filterable').addClass('modified').append(' modify');
+            $('#filterResult').html('Відфільтровано всі елементи з класом filterable');
+        }
+
+        function filterEveryThird() {
+            $('.filterable').removeClass('modified');
+            $('.filterable').filter(function(index) {
+                return (index + 1) % 3 === 0;
+            }).addClass('modified').append(' modify');
+            $('#filterResult').html('Відфільтровано кожен третій елемент');
+        }
+
+        // Завдання 5: Утиліти jQuery
+        function demoRemoveData() {
+            let inputData = $('#dataInput').val();
+            $('#utilityResult').data('test', inputData);
+            let before = $('#utilityResult').data('test');
+            $.removeData($('#utilityResult')[0]);
+            let after = $('#utilityResult').data('test');
+            
+            $('#utilityResult').html(
+                `До видалення: ${before}<br>
+                Після видалення: ${after || 'пусто'}`
+            );
+        }
+
+        function demoTrim() {
+            let text = $('#trimInput').val();
+            let trimmed = $.trim(text);
+            
+            $('#utilityResult').html(
+                `До trim: "${text}"<br>
+                Після trim: "${trimmed}"`
+            );
+        }
+
+        function demoType() {
+            let selectedType = $('#typeSelect').val();
+            let testValue;
+
+            switch(selectedType) {
+                case 'string':
+                    testValue = "Hello";
+                    break;
+                case 'number':
+                    testValue = 123;
+                    break;
+                case 'boolean':
+                    testValue = true;
+                    break;
+                case 'array':
+                    testValue = [];
+                    break;
+                case 'object':
+                    testValue = {};
+                    break;
+                case 'null':
+                    testValue = null;
+                    break;
+                case 'undefined':
+                    testValue = undefined;
+                    break;
+                case 'date':
+                    testValue = new Date();
+                    break;
+                case 'regexp':
+                    testValue = /regex/;
+                    break;
+            }
+
+            $('#utilityResult').html(
+                `Значення: ${testValue}<br>
+                Тип: ${$.type(testValue)}`
+            );
+        }
+    </script>
+    <script>
+        function demoHtml() {
+            let oldHtml = $('#htmlDemo').html();
+            $('#htmlDemo').html('<strong>Новий</strong> HTML контент з <em>форматуванням</em>');
+            $('#htmlResult').html(`Старий HTML: ${oldHtml}<br>Новий HTML: ${$('#htmlDemo').html()}`);
+        }
+
+        function demoCss() {
+            $('#cssDemo').css({
+                'color': '#2196F3',
+                'font-size': '18px',
+                'background-color': '#e3f2fd',
+                'border': '2px solid #2196F3',
+                'padding': '15px'
+            });
+            $('#cssResult').html('Застосовано нові CSS стилі');
+        }
+
+        function demoVal() {
+            let oldVal = $('#valDemo').val();
+            $('#valDemo').val('Нове значення');
+            $('#valResult').html(`Старе значення: ${oldVal}<br>Нове значення: ${$('#valDemo').val()}`);
+        }
+
+        function getAttr() {
+            let classValue = $('#testDiv').attr('class');
+            $('#attrResult').html(`Значення атрибута class: ${classValue}`);
+        }
+
+        function setAttr() {
+            $('#testDiv').attr('title', 'Підказка');
+            $('#attrResult').html('Встановлено атрибут title. Наведіть курсор на елемент.');
+        }
+
+        function setMultipleAttr() {
+            $('#testDiv').attr({
+                'class': 'test-element highlighted',
+                'data-test': 'тестове значення',
+                'title': 'Множинні атрибути'
+            });
+            $('#attrResult').html('Встановлено декілька атрибутів: class, data-test, title');
+        }
+
+        function setAttrFunction() {
+            $('#testDiv').attr('style', function(i, value) {
+                let currentSize = parseInt($('#testDiv').css('font-size')) || 16;
+                return `font-size: ${currentSize + 2}px`;
+            });
+            $('#attrResult').html('Збільшено розмір шрифту');
+        }
+
+        function removeAttr() {
+            $('#testDiv')
+                .removeAttr('style title data-test')
+                .attr('class', 'test-element');
+            $('#attrResult').html('Видалено атрибути style, title, data-test');
+        }
+    </script>
+</body>
+</html>
